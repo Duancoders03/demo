@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NEXUS - Creative Developer Portfolio</title>
+  <meta name="description" content="Khám phá Portfolio hoạt họa 3D hiện đại của Nexus, lập trình viên sáng tạo chuyên về UI/UX và tương tác web.">
+  <link rel="stylesheet" href="style.css">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Background Canvas for Interactive Particles -->
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- Ambient Pulsing Glow Spots -->
+  <div class="ambient-glows">
+    <div class="glow-1"></div>
+    <div class="glow-2"></div>
+  </div>
+
+  <!-- Header Navigation -->
+  <header>
+    <div class="nav-container">
+      <a href="#hero" class="logo">
+        <i class="fa-solid fa-cube"></i> NEX<span>US</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#hero" class="nav-item active">Trang chủ</a></li>
+        <li><a href="#about" class="nav-item">Giới thiệu</a></li>
+        <li><a href="#projects" class="nav-item">Dự án</a></li>
+        <li><a href="#experience" class="nav-item">Kinh nghiệm</a></li>
+        <li><a href="#contact" class="nav-item">Liên hệ</a></li>
+      </ul>
+      <div class="menu-toggle" id="mobile-menu">
+        <i class="fa-solid fa-bars-staggered"></i>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="hero">
+    <div class="hero-content">
+      <div class="hero-subtitle-top">Creative Technologist</div>
+      <h1 class="hero-title">
+        KIẾN TẠO TRẢI NGHIỆM<br>
+        <span>SỐ KHÁC BIỆT</span>
+      </h1>
+      <div class="hero-typewriter">
+        Tôi là một <span id="typewriter-text"></span><span class="cursor">|</span>
+      </div>
+      <div class="hero-buttons">
+        <a href="#projects" class="btn btn-primary">Xem dự án <i class="fa-solid fa-arrow-right"></i></a>
+        <a href="#contact" class="btn btn-secondary">Liên hệ ngay</a>
+      </div>
+    </div>
+    <a href="#about" class="scroll-indicator">
+      Kéo xuống
+      <i class="fa-solid fa-chevron-down"></i>
+    </a>
+  </section>
+
+  <!-- About & Skills Section -->
+  <section id="about">
+    <div class="section-header">
+      <span class="section-subtitle">Giới thiệu</span>
+      <h2 class="section-title">Hành Trình & <span>Kỹ Năng</span></h2>
+    </div>
+    
+    <div class="about-grid">
+      <!-- Bio Details -->
+      <div class="about-card">
+        <div class="about-text">
+          <p>Tôi là một kỹ sư phần mềm chuyên về phát triển Front-end và thiết kế tương tác sáng tạo. Với hơn 4 năm kinh nghiệm làm việc trong lĩnh vực phát triển web, tôi kết hợp giữa tư duy lập trình logic và mắt thẩm mỹ tinh tế để tạo ra các trang web có hiệu suất cao, tương tác mượt mà và giao diện ấn tượng.</p>
+          <p>Tập trung cốt lõi của tôi là mang lại trải nghiệm người dùng hoàn hảo thông qua việc tối ưu hóa hiệu năng, xây dựng các cấu trúc ứng dụng mở rộng và áp dụng các hoạt họa vi mô (micro-interactions) tinh tế.</p>
+        </div>
+        <div class="about-stats">
+          <div class="stat-item">
+            <span class="stat-number" data-target="4">0</span>
+            <span class="stat-label">Năm Kinh Nghiệm</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number" data-target="24">0</span>
+            <span class="stat-label">Dự Án Hoàn Thành</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number" data-target="99">0</span>
+            <span class="stat-label">% Hài Lòng</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Skills Bars -->
+      <div class="skills-wrapper">
+        <div class="skill-card">
+          <div class="skill-info">
+            <span class="skill-name">Frontend Architecture (React/NextJS)</span>
+            <span class="skill-percent">90%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-progress" data-width="90%"></div>
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-info">
+            <span class="skill-name">Interactive Web Animation (GSAP/ThreeJS)</span>
+            <span class="skill-percent">85%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-progress" data-width="85%"></div>
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-info">
+            <span class="skill-name">UI/UX Design & Glassmorphism</span>
+            <span class="skill-percent">80%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-progress" data-width="80%"></div>
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-info">
+            <span class="skill-name">NodeJS & REST API Integration</span>
+            <span class="skill-percent">75%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-progress" data-width="75%"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects">
+    <div class="section-header">
+      <span class="section-subtitle">Dự án tiêu biểu</span>
+      <h2 class="section-title">Sản Phẩm <span>Sáng Tạo</span></h2>
+    </div>
+
+    <div class="projects-grid">
+      <!-- Project 1 -->
+      <div class="project-card" data-project="1">
+        <div class="project-image">
+          <img src="assets/project_1.png" alt="Futuristic Dashboard Mockup">
+          <div class="project-overlay">
+            <span class="view-details">Chi tiết dự án <i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+          </div>
+        </div>
+        <div class="project-content">
+          <div class="project-tags">
+            <span class="project-tag">Web App</span>
+            <span class="project-tag">React</span>
+            <span class="project-tag">Analytics</span>
+          </div>
+          <h3 class="project-title">Aether Dashboard</h3>
+          <p class="project-description">Hệ thống phân tích dữ liệu thời gian thực sử dụng trí tuệ nhân tạo để trực quan hóa hiệu năng hệ thống đám mây.</p>
+        </div>
+      </div>
+
+      <!-- Project 2 -->
+      <div class="project-card" data-project="2">
+        <div class="project-image">
+          <img src="assets/project_2.png" alt="Crypto Mobile App Mockup">
+          <div class="project-overlay">
+            <span class="view-details">Chi tiết dự án <i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+          </div>
+        </div>
+        <div class="project-content">
+          <div class="project-tags">
+            <span class="project-tag">Mobile App</span>
+            <span class="project-tag">Crypto</span>
+            <span class="project-tag">UI/UX</span>
+          </div>
+          <h3 class="project-title">Valo Wallet</h3>
+          <p class="project-description">Ví điện tử phi tập trung giao dịch tài sản số thông minh thế hệ mới với giao diện tối giản hiện đại.</p>
+        </div>
+      </div>
+
+      <!-- Project 3 -->
+      <div class="project-card" data-project="3">
+        <div class="project-image">
+          <img src="assets/project_3.png" alt="3D Web Experience Mockup">
+          <div class="project-overlay">
+            <span class="view-details">Chi tiết dự án <i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+          </div>
+        </div>
+        <div class="project-content">
+          <div class="project-tags">
+            <span class="project-tag">Creative Web</span>
+            <span class="project-tag">ThreeJS</span>
+            <span class="project-tag">Webgl</span>
+          </div>
+          <h3 class="project-title">Chronos 3D Sphere</h3>
+          <p class="project-description">Trang web tương tác 3D WebGL đột phá tái hiện khái niệm không gian và dòng chảy thời gian số học.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience Timeline Section -->
+  <section id="experience">
+    <div class="section-header">
+      <span class="section-subtitle">Hành trình phát triển</span>
+      <h2 class="section-title">Kinh Nghiệm <span>Làm Việc</span></h2>
+    </div>
+
+    <div class="timeline">
+      <!-- Item 1 -->
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <span class="timeline-date">2024 - Hiện tại</span>
+          <h3 class="timeline-role">Lead Frontend Developer</h3>
+          <span class="timeline-company">Helix Interactive Corp</span>
+          <p class="timeline-desc">Chịu trách nhiệm kiến trúc giao diện các ứng dụng Web3 cao cấp, triển khai các kỹ thuật tối ưu render 3D trên trình duyệt và điều phối đội ngũ 6 lập trình viên.</p>
+        </div>
+      </div>
+
+      <!-- Item 2 -->
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <span class="timeline-date">2022 - 2024</span>
+          <h3 class="timeline-role">Senior UI/UX & Web Developer</h3>
+          <span class="timeline-company">Aura Technology</span>
+          <p class="timeline-desc">Phát triển các landing page chiến dịch quảng bá toàn cầu. Ứng dụng các thư viện hoạt họa GSAP và CSS 3D tăng tỷ lệ chuyển đổi tương tác thêm 40%.</p>
+        </div>
+      </div>
+
+      <!-- Item 3 -->
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <span class="timeline-date">2020 - 2022</span>
+          <h3 class="timeline-role">Frontend Web Developer</h3>
+          <span class="timeline-company">Cyber Soft Lab</span>
+          <p class="timeline-desc">Xây dựng và tích hợp giao diện responsive cho hơn 15 dự án thương mại điện tử quy mô lớn. Làm quen chuyên sâu với quy chuẩn SEO và Performance.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <div class="section-header">
+      <span class="section-subtitle">Liên hệ</span>
+      <h2 class="section-title">Bắt Đầu <span>Dự Án Mới</span></h2>
+    </div>
+
+    <div class="contact-container">
+      <!-- Contact Info Cards -->
+      <div class="contact-info">
+        <div class="contact-details">
+          <h3>Hãy cùng tạo nên điều kỳ diệu!</h3>
+          <p>Bạn có một ý tưởng kinh doanh đột phá hay một dự án thiết kế đầy sáng tạo? Hãy chia sẻ với tôi để cùng nhau biến nó thành hiện thực trên không gian số.</p>
+          
+          <div class="contact-list">
+            <div class="contact-item">
+              <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
+              <div>
+                <span class="contact-label">Email</span>
+                <span class="contact-val">contact@nexuscreative.dev</span>
+              </div>
+            </div>
+            
+            <div class="contact-item">
+              <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
+              <div>
+                <span class="contact-label">Điện thoại</span>
+                <span class="contact-val">+84 (90) 123 4567</span>
+              </div>
+            </div>
+            
+            <div class="contact-item">
+              <div class="contact-icon"><i class="fa-solid fa-location-dot"></i></div>
+              <div>
+                <span class="contact-label">Địa điểm</span>
+                <span class="contact-val">Đà Nẵng, Việt Nam</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="social-links">
+          <a href="#" class="social-icon"><i class="fa-brands fa-github"></i></a>
+          <a href="#" class="social-icon"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="#" class="social-icon"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" class="social-icon"><i class="fa-brands fa-dribbble"></i></a>
+        </div>
+      </div>
+
+      <!-- Contact Form -->
+      <form class="contact-form" id="contactForm" onsubmit="event.preventDefault(); alert('Cảm ơn bạn đã gửi tin nhắn! Tôi sẽ phản hồi sớm nhất có thể.'); this.reset();">
+        <div class="form-group">
+          <input type="text" id="name" class="form-input" placeholder=" " required autocomplete="off">
+          <label for="name" class="form-label">Họ và tên</label>
+        </div>
+        <div class="form-group">
+          <input type="email" id="email" class="form-input" placeholder=" " required autocomplete="off">
+          <label for="email" class="form-label">Địa chỉ Email</label>
+        </div>
+        <div class="form-group">
+          <textarea id="message" class="form-input" placeholder=" " required></textarea>
+          <label for="message" class="form-label">Nội dung tin nhắn...</label>
+        </div>
+        <button type="submit" class="btn btn-primary">Gửi thông tin <i class="fa-solid fa-paper-plane"></i></button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <a href="#hero" class="footer-logo">NEX<span>US</span></a>
+      <p>&copy; 2026 Nexus Creative. All rights reserved. Crafted with Passion.</p>
+    </div>
+  </footer>
+
+  <!-- Project Detail Modal -->
+  <div class="modal-overlay" id="projectModal">
+    <div class="modal-container">
+      <div class="modal-close" id="modalClose">
+        <i class="fa-solid fa-xmark"></i>
+      </div>
+      <img src="" alt="Project Hero Image" class="modal-hero-img" id="modalImg">
+      <div class="modal-content-wrap">
+        <div class="modal-header">
+          <div class="modal-tags" id="modalTags">
+            <!-- Dynamic tags -->
+          </div>
+          <h2 class="modal-title" id="modalTitle">Project Title</h2>
+        </div>
+        
+        <div class="modal-meta-grid">
+          <div class="meta-box">
+            <span>Khách hàng</span>
+            <p id="modalClient">Nexus Labs</p>
+          </div>
+          <div class="meta-box">
+            <span>Thời gian</span>
+            <p id="modalDate">Tháng 03, 2026</p>
+          </div>
+          <div class="meta-box">
+            <span>Vai trò</span>
+            <p id="modalRole">Lead Architect / developer</p>
+          </div>
+        </div>
+
+        <div class="modal-body" id="modalBody">
+          <!-- Dynamic details -->
+        </div>
+
+        <div class="modal-footer">
+          <a href="#" class="btn btn-primary" id="modalLink" target="_blank">Xem Live Demo <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+          <button class="btn btn-secondary" id="modalCloseBtn">Đóng lại</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading GSAP and ScrollTrigger plugins -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
