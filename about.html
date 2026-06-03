@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NEXUS - Giới Thiệu & FAQ</title>
+  <meta name="description" content="Tìm hiểu thêm về đội ngũ Nexus, giá trị cốt lõi, thành tựu nghề nghiệp và các câu hỏi thường gặp về dịch vụ thiết kế web tương tác.">
+  <link rel="stylesheet" href="style.css">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Background Canvas for Interactive Particles -->
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- Ambient Pulsing Glow Spots -->
+  <div class="ambient-glows">
+    <div class="glow-1"></div>
+    <div class="glow-2"></div>
+  </div>
+
+  <!-- Header Navigation -->
+  <header>
+    <div class="nav-container">
+      <a href="index.html#hero" class="logo">
+        <i class="fa-solid fa-cube"></i> NEX<span>US</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html#hero" class="nav-item">Trang chủ</a></li>
+        <li><a href="about.html" class="nav-item active">Giới thiệu</a></li>
+        <li><a href="index.html#projects" class="nav-item">Dự án</a></li>
+        <li><a href="courses.html" class="nav-item">Khóa học</a></li>
+        <li><a href="index.html#experience" class="nav-item">Kinh nghiệm</a></li>
+        <li><a href="index.html#contact" class="nav-item">Liên hệ</a></li>
+      </ul>
+      <div class="menu-toggle" id="mobile-menu">
+        <i class="fa-solid fa-bars-staggered"></i>
+      </div>
+    </div>
+  </header>
+
+  <!-- About Hero Banner -->
+  <section class="page-hero">
+    <div class="page-hero-content">
+      <span class="section-subtitle">Về chúng tôi</span>
+      <h1 class="hero-title" style="opacity: 1; transform: none; margin-bottom: 1rem;">
+        CHÚNG TÔI LÀ <span>NEXUS</span>
+      </h1>
+      <p style="color: var(--text-muted); font-size: 1.15rem; line-height: 1.6; max-width: 650px; margin: 0 auto;">
+        Khám phá hành trình kiến tạo những giao diện tương tác kỹ thuật số đỉnh cao và tư duy phát triển sản phẩm đột phá.
+      </p>
+    </div>
+  </section>
+
+  <!-- Core Values -->
+  <section id="values" style="padding-top: 2rem;">
+    <div class="section-header">
+      <span class="section-subtitle">Triết lý thiết kế</span>
+      <h2 class="section-title">Giá Trị <span>Cốt Lõi</span></h2>
+    </div>
+
+    <div class="values-grid">
+      <!-- Card 1 -->
+      <div class="value-card">
+        <div class="value-icon"><i class="fa-solid fa-lightbulb"></i></div>
+        <h3 class="value-title">Sáng Tạo Đột Phá</h3>
+        <p class="value-desc">Chúng tôi không đi theo lối mòn cũ kỹ. Mỗi dự án đều là một sân chơi nghệ thuật công nghệ với ý tưởng độc bản và cá tính riêng.</p>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="value-card">
+        <div class="value-icon"><i class="fa-solid fa-bolt"></i></div>
+        <h3 class="value-title">Hiệu Năng Tối Ưu</h3>
+        <p class="value-desc">Dù chứa đựng nhiều chuyển động phức tạp, mã nguồn luôn được tinh gọn tối đa để đạt tốc độ tải trang nhanh và mượt mà nhất.</p>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="value-card">
+        <div class="value-icon"><i class="fa-solid fa-user-check"></i></div>
+        <h3 class="value-title">Trải Nghiệm Thực Tế</h3>
+        <p class="value-desc">Hoạt họa sinh động nhưng không làm phân tâm người dùng. Mọi trải nghiệm đều xoay quanh việc giúp người dùng dễ thao tác nhất.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Certifications Section -->
+  <section id="certs">
+    <div class="section-header">
+      <span class="section-subtitle">Chứng chỉ chuyên ngành</span>
+      <h2 class="section-title">Năng Lực <span>Được Công Nhận</span></h2>
+    </div>
+
+    <div class="certs-grid">
+      <!-- Cert 1 -->
+      <div class="cert-card">
+        <div class="cert-icon"><i class="fa-solid fa-medal"></i></div>
+        <div>
+          <h3 class="cert-title">React Advanced Engineer</h3>
+          <span class="cert-issuer">Meta / Coursera &bull; 2024</span>
+        </div>
+      </div>
+      
+      <!-- Cert 2 -->
+      <div class="cert-card">
+        <div class="cert-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+        <div>
+          <h3 class="cert-title">Interactive WebGL Developer</h3>
+          <span class="cert-issuer">ThreeJS Journey Academy &bull; 2023</span>
+        </div>
+      </div>
+
+      <!-- Cert 3 -->
+      <div class="cert-card">
+        <div class="cert-icon"><i class="fa-solid fa-award"></i></div>
+        <div>
+          <h3 class="cert-title">Google UX Design Certificate</h3>
+          <span class="cert-issuer">Google Career Certificates &bull; 2023</span>
+        </div>
+      </div>
+
+      <!-- Cert 4 -->
+      <div class="cert-card">
+        <div class="cert-icon"><i class="fa-solid fa-certificate"></i></div>
+        <div>
+          <h3 class="cert-title">GSAP Pro Animator</h3>
+          <span class="cert-issuer">GreenSock Training Network &bull; 2022</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Accordion -->
+  <section id="faq">
+    <div class="section-header">
+      <span class="section-subtitle">Giải đáp thắc mắc</span>
+      <h2 class="section-title">Câu Hỏi <span>Thường Gặp</span></h2>
+    </div>
+
+    <div class="faq-wrapper">
+      <!-- Item 1 -->
+      <div class="faq-item">
+        <div class="faq-header">
+          <h3 class="faq-question">1. Lĩnh vực hoạt động chính của Nexus là gì?</h3>
+          <div class="faq-icon"><i class="fa-solid fa-chevron-down"></i></div>
+        </div>
+        <div class="faq-body">
+          <div class="faq-content">
+            Chúng tôi tập trung vào việc thiết kế website tương tác 3D WebGL, ứng dụng quản trị dữ liệu lớn (Dashboard) với giao diện mượt mà, và xây dựng hệ thống phần mềm hiệu năng cao sử dụng React/NextJS kết hợp cùng NodeJS.
+          </div>
+        </div>
+      </div>
+
+      <!-- Item 2 -->
+      <div class="faq-item">
+        <div class="faq-header">
+          <h3 class="faq-question">2. Quy trình làm việc một dự án diễn ra như thế nào?</h3>
+          <div class="faq-icon"><i class="fa-solid fa-chevron-down"></i></div>
+        </div>
+        <div class="faq-body">
+          <div class="faq-content">
+            Quy trình khép kín gồm 4 bước: (1) Nghiên cứu & Định hướng Concept &rarr; (2) Thiết kế giao diện tĩnh Wireframe &rarr; (3) Lập trình giao diện & Triển khai hoạt họa GSAP/ThreeJS &rarr; (4) Tối ưu hiệu năng, cấu hình chuẩn SEO và bàn giao mã nguồn.
+          </div>
+        </div>
+      </div>
+
+      <!-- Item 3 -->
+      <div class="faq-item">
+        <div class="faq-header">
+          <h3 class="faq-question">3. Bạn sử dụng công cụ hoạt họa chính nào cho trang web?</h3>
+          <div class="faq-icon"><i class="fa-solid fa-chevron-down"></i></div>
+        </div>
+        <div class="faq-body">
+          <div class="faq-content">
+            GSAP (GreenSock Animation Platform) là hạt nhân cốt lõi cho các hiệu ứng trượt cuộn và tương tác vi mô nhờ thuật toán vật lý mượt mà. Bên cạnh đó, chúng tôi phát triển các hiệu ứng nền bằng HTML5 Canvas API và các không gian 3D phức tạp bằng Three.js (WebGL).
+          </div>
+        </div>
+      </div>
+
+      <!-- Item 4 -->
+      <div class="faq-item">
+        <div class="faq-header">
+          <h3 class="faq-question">4. Có hỗ trợ bảo hành hay chỉnh sửa sau khi bàn giao sản phẩm không?</h3>
+          <div class="faq-icon"><i class="fa-solid fa-chevron-down"></i></div>
+        </div>
+        <div class="faq-body">
+          <div class="faq-content">
+            Tất cả các dự án do Nexus phát triển đều đi kèm gói bảo hành và bảo trì kỹ thuật miễn phí trong vòng 6 tháng đầu. Chúng tôi hỗ trợ sửa đổi các lỗi phát sinh, cập nhật thư viện và hướng dẫn sử dụng chi tiết bằng video tài liệu.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <a href="index.html#hero" class="footer-logo">NEX<span>US</span></a>
+      <p>&copy; 2026 Nexus Creative. All rights reserved. Crafted with Passion.</p>
+    </div>
+  </footer>
+
+  <!-- Loading GSAP and ScrollTrigger plugins -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

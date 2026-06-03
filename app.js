@@ -8,6 +8,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initGsapAnimations();
   initCardTilt();
   initProjectModal();
+  initFaqAccordion();
+  initCourseFilters();
+  initTestimonialSlider();
 });
 
 /* =========================================================================
@@ -15,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
    ========================================================================= */
 function initParticles() {
   const canvas = document.getElementById('particle-canvas');
+  if (!canvas) return;
   const ctx = canvas.getContext('2d');
   
   let width = canvas.width = window.innerWidth;
@@ -32,7 +36,6 @@ function initParticles() {
   };
 
   function calculateCount() {
-    // Fewer particles on smaller screens
     return window.innerWidth < 768 ? 40 : 100;
   }
 
@@ -63,7 +66,6 @@ function initParticles() {
     }
 
     position() {
-      // Bounce boundaries
       if (this.x + this.velocityX > width || this.x + this.velocityX < 0) {
         this.velocityX = -this.velocityX;
       }
@@ -98,7 +100,6 @@ function initParticles() {
         }
       }
       
-      // Connect to mouse
       if (mouse.x !== null && mouse.y !== null) {
         const mouseDist = Math.hypot(particles[i].x - mouse.x, particles[i].y - mouse.y);
         if (mouseDist < properties.mouseRadius) {
@@ -123,15 +124,11 @@ function initParticles() {
 
   function loop() {
     ctx.clearRect(0, 0, width, height);
-    
-    // Smooth grid lines
     drawLines();
-    
     particles.forEach(p => {
       p.position();
       p.draw();
     });
-    
     requestAnimationFrame(loop);
   }
 
@@ -148,6 +145,8 @@ function initNavbar() {
   const navLinks = document.querySelector('.nav-links');
   const navItems = document.querySelectorAll('.nav-item');
 
+  if (!header) return;
+
   // Sticky navbar logic
   window.addEventListener('scroll', () => {
     if (window.scrollY > 50) {
@@ -156,7 +155,7 @@ function initNavbar() {
       header.classList.remove('scrolled');
     }
     
-    // Highlight Active Nav Links based on Scroll Section
+    // Highlight Active Nav Links based on current file/section
     let current = '';
     const sections = document.querySelectorAll('section');
     sections.forEach(section => {
@@ -166,38 +165,55 @@ function initNavbar() {
       }
     });
 
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+
     navItems.forEach(item => {
       item.classList.remove('active');
-      if (item.getAttribute('href').includes(current)) {
-        item.classList.add('active');
+      const href = item.getAttribute('href');
+      
+      if (currentPage === 'index.html' || currentPage === '') {
+        if (href.startsWith('index.html#') && href.includes(current)) {
+          item.classList.add('active');
+        } else if (href === 'index.html#hero' && current === 'hero') {
+          item.classList.add('active');
+        }
+      } else {
+        if (href.includes(currentPage)) {
+          item.classList.add('active');
+        }
       }
     });
   });
 
   // Mobile menu toggle
-  menuToggle.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-    const icon = menuToggle.querySelector('i');
-    if (navLinks.classList.contains('active')) {
-      icon.classList.replace('fa-bars-staggered', 'fa-xmark');
-    } else {
-      icon.classList.replace('fa-xmark', 'fa-bars-staggered');
-    }
-  });
-
-  // Close mobile menu on item click
-  navItems.forEach(item => {
-    item.addEventListener('click', () => {
-      navLinks.classList.remove('active');
-      menuToggle.querySelector('i').classList.replace('fa-xmark', 'fa-bars-staggered');
+  if (menuToggle && navLinks) {
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+      const icon = menuToggle.querySelector('i');
+      if (navLinks.classList.contains('active')) {
+        icon.classList.replace('fa-bars-staggered', 'fa-xmark');
+      } else {
+        icon.classList.replace('fa-xmark', 'fa-bars-staggered');
+      }
     });
-  });
+
+    // Close mobile menu on item click
+    navItems.forEach(item => {
+      item.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+        menuToggle.querySelector('i').classList.replace('fa-xmark', 'fa-bars-staggered');
+      });
+    });
+  }
 }
 
 /* =========================================================================
    3. TYPEWRITER EFFECT
    ========================================================================= */
 function initTypewriter() {
+  const container = document.getElementById('typewriter-text');
+  if (!container) return;
+
   const words = ["Kỹ sư phần mềm.", "UI/UX Designer.", "Creative Technologist.", "Lập trình viên Front-End."];
   let i = 0;
   let timer;
@@ -206,7 +222,7 @@ function initTypewriter() {
     let word = words[i].split("");
     var loopTyping = function() {
       if (word.length > 0) {
-        document.getElementById('typewriter-text').innerHTML += word.shift();
+        container.innerHTML += word.shift();
       } else {
         setTimeout(deletingEffect, 2000);
         return false;
@@ -221,7 +237,7 @@ function initTypewriter() {
     var loopDeleting = function() {
       if (word.length > 0) {
         word.pop();
-        document.getElementById('typewriter-text').innerHTML = word.join("");
+        container.innerHTML = word.join("");
       } else {
         if (words.length > (i + 1)) {
           i++;
@@ -243,13 +259,15 @@ function initTypewriter() {
    4. GSAP SCROLLTRIGGER ANIMATIONS
    ========================================================================= */
 function initGsapAnimations() {
-  // Hero entry animation sequence
-  const heroTl = gsap.timeline();
-  heroTl.to('.hero-subtitle-top', { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out', delay: 0.3 })
-        .to('.hero-title', { opacity: 1, y: 0, duration: 1, ease: 'power4.out' }, '-=0.5')
-        .to('.hero-typewriter', { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, '-=0.6')
-        .to('.hero-buttons', { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, '-=0.6')
-        .to('.scroll-indicator', { opacity: 1, duration: 0.5 }, '-=0.2');
+  // Hero entry animation sequence (Home only)
+  if (document.querySelector('.hero-title') && document.getElementById('hero')) {
+    const heroTl = gsap.timeline();
+    heroTl.to('.hero-subtitle-top', { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out', delay: 0.3 })
+          .to('.hero-title', { opacity: 1, y: 0, duration: 1, ease: 'power4.out' }, '-=0.5')
+          .to('.hero-typewriter', { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, '-=0.6')
+          .to('.hero-buttons', { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, '-=0.6')
+          .to('.scroll-indicator', { opacity: 1, duration: 0.5 }, '-=0.2');
+  }
 
   // Generic Reveal Headers animations
   const sectionHeaders = document.querySelectorAll('.section-header');
@@ -300,17 +318,19 @@ function initGsapAnimations() {
   });
 
   // Projects staggered card entry
-  gsap.from('.project-card', {
-    scrollTrigger: {
-      trigger: '.projects-grid',
-      start: 'top 80%'
-    },
-    opacity: 0,
-    y: 60,
-    duration: 1.2,
-    stagger: 0.2,
-    ease: 'power3.out'
-  });
+  if (document.querySelector('.project-card')) {
+    gsap.from('.project-card', {
+      scrollTrigger: {
+        trigger: '.projects-grid',
+        start: 'top 80%'
+      },
+      opacity: 0,
+      y: 60,
+      duration: 1.2,
+      stagger: 0.2,
+      ease: 'power3.out'
+    });
+  }
 
   // Timeline Slide-In Reveal
   const timelineItems = document.querySelectorAll('.timeline-item');
@@ -339,28 +359,60 @@ function initGsapAnimations() {
     });
   });
 
-  // Contact elements reveal
-  gsap.from('.contact-info', {
-    scrollTrigger: {
-      trigger: '.contact-container',
-      start: 'top 85%'
-    },
-    opacity: 0,
-    x: -50,
-    duration: 1,
-    ease: 'power3.out'
-  });
+  // Value cards fade in (About page specific)
+  if (document.querySelector('.values-grid')) {
+    gsap.from('.value-card', {
+      scrollTrigger: {
+        trigger: '.values-grid',
+        start: 'top 80%'
+      },
+      opacity: 0,
+      y: 40,
+      duration: 1,
+      stagger: 0.2,
+      ease: 'power3.out'
+    });
+  }
 
-  gsap.from('.contact-form', {
-    scrollTrigger: {
-      trigger: '.contact-container',
-      start: 'top 85%'
-    },
-    opacity: 0,
-    x: 50,
-    duration: 1,
-    ease: 'power3.out'
-  });
+  // Certification cards fade in (About page specific)
+  if (document.querySelector('.certs-grid')) {
+    gsap.from('.cert-card', {
+      scrollTrigger: {
+        trigger: '.certs-grid',
+        start: 'top 80%'
+      },
+      opacity: 0,
+      y: 30,
+      duration: 0.8,
+      stagger: 0.15,
+      ease: 'power3.out'
+    });
+  }
+
+  // Contact elements reveal
+  if (document.querySelector('.contact-container')) {
+    gsap.from('.contact-info', {
+      scrollTrigger: {
+        trigger: '.contact-container',
+        start: 'top 85%'
+      },
+      opacity: 0,
+      x: -50,
+      duration: 1,
+      ease: 'power3.out'
+    });
+
+    gsap.from('.contact-form', {
+      scrollTrigger: {
+        trigger: '.contact-container',
+        start: 'top 85%'
+      },
+      opacity: 0,
+      x: 50,
+      duration: 1,
+      ease: 'power3.out'
+    });
+  }
 }
 
 /* =========================================================================
@@ -368,26 +420,22 @@ function initGsapAnimations() {
    ========================================================================= */
 function initCardTilt() {
   const cards = document.querySelectorAll('.project-card');
+  if (!cards.length) return;
   
-  // Disable 3D tilt on smaller/mobile devices for performance
   if (window.innerWidth < 1024) return;
 
   cards.forEach(card => {
     card.addEventListener('mousemove', (e) => {
       const cardRect = card.getBoundingClientRect();
-      
       const cardWidth = cardRect.width;
       const cardHeight = cardRect.height;
       
-      // Coordinate values relative to the card center (-0.5 to 0.5)
       const mouseX = (e.clientX - cardRect.left) / cardWidth - 0.5;
       const mouseY = (e.clientY - cardRect.top) / cardHeight - 0.5;
       
-      // Calculate rotation intensities (max 10 degrees)
       const rotateX = -mouseY * 15;
       const rotateY = mouseX * 15;
 
-      // Transform translation and rotations
       card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-5px)`;
     });
 
@@ -414,8 +462,7 @@ const projectsDb = {
     date: "Tháng 03, 2026",
     role: "Lead Front-end Developer",
     body: `<p>Aether Dashboard là một ứng dụng phân tích đám mây thông minh được thiết kế đặc biệt cho các kỹ sư Devops và giám sát viên hạ tầng công nghệ cao. Dự án yêu cầu hệ thống thu nhận dữ liệu lên tới 10,000 sự kiện/giây và kết xuất biểu đồ đồ họa mượt mà không gặp hiện tượng trễ hoặc đứng hình.</p>
-           <p>Tôi đã thiết kế hệ thống luồng dữ liệu tối ưu hóa bằng React Context kết hợp với Web Workers để phân phối tính toán phân tích biểu đồ ra ngoài tiến trình UI. Canvas rendering được ứng dụng tối đa cho các biểu đồ thời gian thực.</p>
-           <p>Hơn thế nữa, hệ thống theme của dashboard được phát triển dưới dạng kiến trúc modular CSS Variables cao cấp, cho phép tùy chỉnh màu nền theo nhu cầu khách hàng doanh nghiệp hoặc chuyển trạng thái Dark/Light mode chỉ với 1 click.</p>`,
+           <p>Tôi đã thiết kế hệ thống luồng dữ liệu tối ưu hóa bằng React Context kết hợp với Web Workers để phân phối tính toán phân tích biểu đồ ra ngoài tiến trình UI. Canvas rendering được ứng dụng tối đa cho các biểu đồ thời gian thực.</p>`,
     link: "#"
   },
   2: {
@@ -426,8 +473,7 @@ const projectsDb = {
     date: "Tháng 12, 2025",
     role: "UI/UX & Mobile Developer",
     body: `<p>Valo Wallet là một sản phẩm ví tài sản phi tập trung thế hệ mới tập trung tối đa vào tính năng bảo mật và trải nghiệm tối giản hóa. Dự án giải quyết bài toán lớn về sự phức tạp trong quản lý khóa bảo mật và cụm từ hạt giống (seed phrase) cho người mới tham gia thị trường.</p>
-           <p>Giao diện ứng dụng sử dụng phong cách Glassmorphic kết hợp các lớp mờ chồng khéo léo để tạo chiều sâu trực quan trên thiết bị di động. Biểu đồ thay đổi số dư được phát triển với hiệu ứng hoạt họa mượt mà sử dụng React Native Reanimated.</p>
-           <p>Chúng tôi đã tích hợp trực tiếp cổng hoán đổi (Swap API) và staking thông qua hợp đồng thông minh, giúp người dùng tiết kiệm thời gian tương tác với mạng lưới lên đến 60%.</p>`,
+           <p>Giao diện ứng dụng sử dụng phong cách Glassmorphic kết hợp các lớp mờ chồng khéo léo để tạo chiều sâu trực quan trên thiết bị di động.</p>`,
     link: "#"
   },
   3: {
@@ -438,19 +484,19 @@ const projectsDb = {
     date: "Tháng 08, 2025",
     role: "Creative Interactive Developer",
     body: `<p>Dự án Chronos 3D Sphere được xây dựng để kỷ niệm triển lãm kỹ thuật số lớn của Bảo tàng Thời gian Chronos. Giao diện trang web dẫn dắt người xem qua lịch sử dòng chảy của thời gian từ cổ đại tới kỷ nguyên số thông qua mô hình tương tác 3D WebGL.</p>
-           <p>Tôi đã sử dụng ThreeJS cùng với custom GLSL shaders để sinh ra một quả cầu năng lượng phát sáng khổng lồ gồm hơn 50,000 hạt particles nhỏ tự chuyển động theo quỹ đạo xoắn ốc Fibonacci.</p>
-           <p>Mỗi lần cuộn trang, GSAP ScrollTrigger sẽ điều chỉnh tọa độ Camera và thay đổi màu sắc phát sáng của hạt năng lượng tương ứng với các cột mốc lịch sử, tạo cảm giác vô cùng lôi cuốn và trực quan sinh động.</p>`,
+           <p>Tôi đã sử dụng ThreeJS cùng với custom GLSL shaders để sinh ra một quả cầu năng lượng phát sáng khổng lồ gồm hơn 50,000 hạt particles nhỏ.</p>`,
     link: "#"
   }
 };
 
 function initProjectModal() {
   const modal = document.getElementById('projectModal');
+  if (!modal) return;
+
   const modalClose = document.getElementById('modalClose');
   const modalCloseBtn = document.getElementById('modalCloseBtn');
-  const projectCards = document.querySelectorAll('.project-card');
+  const projectCards = document.querySelectorAll('.project-card:not(.course-card)');
 
-  // Modal elements
   const modalImg = document.getElementById('modalImg');
   const modalTitle = document.getElementById('modalTitle');
   const modalTags = document.getElementById('modalTags');
@@ -472,7 +518,6 @@ function initProjectModal() {
     modalBody.innerHTML = data.body;
     modalLink.href = data.link;
 
-    // Populate tags
     modalTags.innerHTML = '';
     data.tags.forEach(tag => {
       const span = document.createElement('span');
@@ -480,14 +525,13 @@ function initProjectModal() {
       modalTags.appendChild(span);
     });
 
-    // Show modal
     modal.classList.add('active');
-    document.body.style.overflow = 'hidden'; // Lock scroll
+    document.body.style.overflow = 'hidden';
   }
 
   function closeModal() {
     modal.classList.remove('active');
-    document.body.style.overflow = ''; // Unlock scroll
+    document.body.style.overflow = '';
   }
 
   projectCards.forEach(card => {
@@ -497,20 +541,137 @@ function initProjectModal() {
     });
   });
 
-  modalClose.addEventListener('click', closeModal);
-  modalCloseBtn.addEventListener('click', closeModal);
+  if (modalClose) modalClose.addEventListener('click', closeModal);
+  if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeModal);
 
-  // Close on overlay background click
   modal.addEventListener('click', (e) => {
     if (e.target === modal) {
       closeModal();
     }
   });
 
-  // Close on Escape key press
   window.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && modal.classList.contains('active')) {
       closeModal();
     }
   });
+}
+
+/* =========================================================================
+   7. INTERACTIVE FAQ ACCORDION (About Page specific)
+   ========================================================================= */
+function initFaqAccordion() {
+  const faqHeaders = document.querySelectorAll('.faq-header');
+  if (!faqHeaders.length) return;
+
+  faqHeaders.forEach(header => {
+    header.addEventListener('click', () => {
+      const item = header.parentElement;
+      const body = item.querySelector('.faq-body');
+      const isActive = item.classList.contains('active');
+
+      // Close other active accordion items
+      document.querySelectorAll('.faq-item').forEach(otherItem => {
+        if (otherItem !== item && otherItem.classList.contains('active')) {
+          otherItem.classList.remove('active');
+          gsap.to(otherItem.querySelector('.faq-body'), { height: 0, duration: 0.3, ease: 'power2.out' });
+        }
+      });
+
+      // Toggle current
+      if (isActive) {
+        item.classList.remove('active');
+        gsap.to(body, { height: 0, duration: 0.3, ease: 'power2.out' });
+      } else {
+        item.classList.add('active');
+        gsap.to(body, { height: 'auto', duration: 0.4, ease: 'power2.out' });
+      }
+    });
+  });
+}
+
+/* =========================================================================
+   8. COURSE CATEGORY FILTERS (Courses Page specific)
+   ========================================================================= */
+function initCourseFilters() {
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const courseCards = document.querySelectorAll('.course-card');
+
+  if (!filterBtns.length) return;
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const filter = btn.getAttribute('data-filter');
+
+      // Toggle active states on buttons
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      // Filter and animate card transitions
+      courseCards.forEach(card => {
+        const category = card.getAttribute('data-category');
+        if (filter === 'all' || category === filter) {
+          card.classList.remove('hide');
+          gsap.fromTo(card, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' });
+        } else {
+          gsap.to(card, { opacity: 0, y: -30, duration: 0.3, ease: 'power2.out', onComplete: () => {
+            card.classList.add('hide');
+          }});
+        }
+      });
+    });
+  });
+}
+
+/* =========================================================================
+   9. STUDENT TESTIMONIAL SLIDER (Courses Page specific)
+   ========================================================================= */
+function initTestimonialSlider() {
+  const prevBtn = document.getElementById('sliderPrev');
+  const nextBtn = document.getElementById('sliderNext');
+  const slides = document.querySelectorAll('.testimonial-card');
+  let currentIndex = 0;
+
+  if (!slides.length) return;
+
+  function showSlide(index) {
+    slides.forEach((slide, i) => {
+      slide.classList.remove('active');
+      if (i === index) {
+        slide.classList.add('active');
+        // Smooth scaling entry
+        gsap.fromTo(slide, { opacity: 0, scale: 0.95 }, { opacity: 1, scale: 1, duration: 0.5, ease: 'power2.out' });
+      }
+    });
+  }
+
+  if (prevBtn && nextBtn) {
+    prevBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+      showSlide(currentIndex);
+    });
+
+    nextBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex + 1) % slides.length;
+      showSlide(currentIndex);
+    });
+  }
+
+  // Automatic slide rotation every 6 seconds
+  let autoPlay = setInterval(() => {
+    currentIndex = (currentIndex + 1) % slides.length;
+    showSlide(currentIndex);
+  }, 6000);
+
+  // Pause autoplay when user hovers reviews section
+  const container = document.querySelector('.testimonials-container');
+  if (container) {
+    container.addEventListener('mouseenter', () => clearInterval(autoPlay));
+    container.addEventListener('mouseleave', () => {
+      autoPlay = setInterval(() => {
+        currentIndex = (currentIndex + 1) % slides.length;
+        showSlide(currentIndex);
+      }, 6000);
+    });
+  }
 }

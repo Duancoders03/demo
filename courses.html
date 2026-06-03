@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NEXUS - Khóa Học Lập Trình Sáng Tạo</title>
+  <meta name="description" content="Khám phá các khóa học phát triển giao diện chuyên sâu, hoạt họa web nâng cao và tư duy thiết kế hệ thống UI/UX tại học viện công nghệ Nexus.">
+  <link rel="stylesheet" href="style.css">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Background Canvas for Interactive Particles -->
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- Ambient Pulsing Glow Spots -->
+  <div class="ambient-glows">
+    <div class="glow-1"></div>
+    <div class="glow-2"></div>
+  </div>
+
+  <!-- Header Navigation -->
+  <header>
+    <div class="nav-container">
+      <a href="index.html#hero" class="logo">
+        <i class="fa-solid fa-cube"></i> NEX<span>US</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html#hero" class="nav-item">Trang chủ</a></li>
+        <li><a href="about.html" class="nav-item">Giới thiệu</a></li>
+        <li><a href="index.html#projects" class="nav-item">Dự án</a></li>
+        <li><a href="courses.html" class="nav-item active">Khóa học</a></li>
+        <li><a href="index.html#experience" class="nav-item">Kinh nghiệm</a></li>
+        <li><a href="index.html#contact" class="nav-item">Liên hệ</a></li>
+      </ul>
+      <div class="menu-toggle" id="mobile-menu">
+        <i class="fa-solid fa-bars-staggered"></i>
+      </div>
+    </div>
+  </header>
+
+  <!-- Courses Hero Banner -->
+  <section class="page-hero">
+    <div class="page-hero-content">
+      <span class="section-subtitle">Chương trình đào tạo</span>
+      <h1 class="hero-title" style="opacity: 1; transform: none; margin-bottom: 1rem;">
+        HỌC VIỆN <span>NEXUS</span>
+      </h1>
+      <p style="color: var(--text-muted); font-size: 1.15rem; line-height: 1.6; max-width: 650px; margin: 0 auto;">
+        Khám phá các khóa học lập trình Frontend và hoạt họa tương tác chuyên sâu được thiết kế chi tiết để bứt phá mọi giới hạn.
+      </p>
+    </div>
+  </section>
+
+  <!-- Courses Filter & Cards Grid -->
+  <section id="courses-list" style="padding-top: 2rem;">
+    <!-- Filters -->
+    <div class="filter-controls">
+      <button class="filter-btn active" data-filter="all">Tất cả</button>
+      <button class="filter-btn" data-filter="frontend">Frontend</button>
+      <button class="filter-btn" data-filter="animation">Hoạt họa Web</button>
+      <button class="filter-btn" data-filter="uiux">UI/UX & Design</button>
+    </div>
+
+    <!-- Cards Grid -->
+    <div class="projects-grid">
+      <!-- Course 1 -->
+      <div class="project-card course-card" data-category="frontend">
+        <div class="project-image course-image">
+          <img src="assets/course_1.png" alt="Frontend Masterclass Cover">
+          <div class="course-badge-price">1.800.000đ</div>
+        </div>
+        <div class="project-content">
+          <div class="project-tags">
+            <span class="project-tag">React</span>
+            <span class="project-tag">Next.js</span>
+            <span class="project-tag">API Integration</span>
+          </div>
+          <h3 class="project-title">Frontend Masterclass</h3>
+          <p class="project-description">Làm chủ kiến trúc Single Page Application, tối ưu hóa render State trong React, tích hợp API RESTful và cấu trúc thư mục quy chuẩn.</p>
+          <div class="course-meta-info">
+            <span><i class="fa-solid fa-calendar"></i> 12 tuần</span>
+            <span><i class="fa-solid fa-circle-nodes"></i> Mọi cấp độ</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Course 2 -->
+      <div class="project-card course-card" data-category="animation">
+        <div class="project-image course-image">
+          <img src="assets/course_2.png" alt="Creative Animations Cover">
+          <div class="course-badge-price">1.500.000đ</div>
+        </div>
+        <div class="project-content">
+          <div class="project-tags">
+            <span class="project-tag">GSAP</span>
+            <span class="project-tag">ScrollTrigger</span>
+            <span class="project-tag">SVG Motion</span>
+          </div>
+          <h3 class="project-title">Creative Web Animations</h3>
+          <p class="project-description">Khai phá sức mạnh của thư viện hoạt họa GreenSock. Lập trình cuộn chuột ScrollTrigger, vẽ hình động SVG và tối ưu FPS trình duyệt.</p>
+          <div class="course-meta-info">
+            <span><i class="fa-solid fa-calendar"></i> 8 tuần</span>
+            <span><i class="fa-solid fa-circle-nodes"></i> Nâng cao</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Course 3 -->
+      <div class="project-card course-card" data-category="uiux">
+        <div class="project-image course-image">
+          <img src="assets/project_2.png" alt="UIUX Design Cover">
+          <div class="course-badge-price">1.200.000đ</div>
+        </div>
+        <div class="project-content">
+          <div class="project-tags">
+            <span class="project-tag">Figma</span>
+            <span class="project-tag">Design System</span>
+            <span class="project-tag">Glassmorphism</span>
+          </div>
+          <h3 class="project-title">Modern UI/UX Design System</h3>
+          <p class="project-description">Tự tay thiết kế giao diện từ Wireframe cơ bản đến Prototype tương tác cao cấp. Thực hành thiết kế lưới Grid, Typography và màu sắc.</p>
+          <div class="course-meta-info">
+            <span><i class="fa-solid fa-calendar"></i> 6 tuần</span>
+            <span><i class="fa-solid fa-circle-nodes"></i> Cơ bản</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Course 4 -->
+      <div class="project-card course-card" data-category="animation">
+        <div class="project-image course-image">
+          <img src="assets/project_3.png" alt="WebGL ThreeJS Cover">
+          <div class="course-badge-price">2.400.000đ</div>
+        </div>
+        <div class="project-content">
+          <div class="project-tags">
+            <span class="project-tag">ThreeJS</span>
+            <span class="project-tag">WebGL</span>
+            <span class="project-tag">GLSL Shader</span>
+          </div>
+          <h3 class="project-title">WebGL & ThreeJS 3D Experience</h3>
+          <p class="project-description">Nhúng mô hình 3D phức tạp lên trình duyệt web. Lập trình chuyển động hạt particle, ánh sáng vật lý và camera 3 chiều tương tác.</p>
+          <div class="course-meta-info">
+            <span><i class="fa-solid fa-calendar"></i> 10 tuần</span>
+            <span><i class="fa-solid fa-circle-nodes"></i> Chuyên sâu</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Student Reviews Testimonials -->
+  <section id="reviews">
+    <div class="section-header">
+      <span class="section-subtitle">Đánh giá thực tế</span>
+      <h2 class="section-title">Học Viên <span>Nói Gì?</span></h2>
+    </div>
+
+    <div class="testimonials-container">
+      <div class="slider-btn prev" id="sliderPrev"><i class="fa-solid fa-chevron-left"></i></div>
+      <div class="slider-btn next" id="sliderNext"><i class="fa-solid fa-chevron-right"></i></div>
+      
+      <div class="testimonials-slider">
+        <!-- Slide 1 -->
+        <div class="testimonial-card active">
+          <p class="testimonial-quote">"Khóa học Creative Web Animations thực sự thay đổi cách nhìn của tôi về phát triển web. Từ việc chỉ code giao diện tĩnh đơn thuần, nay tôi đã tự tin làm ra các landing page chuyển động mượt mà."</p>
+          <div class="student-info">
+            <div class="student-img">H</div>
+            <div>
+              <h4 class="student-name">Trần Minh Hoàng</h4>
+              <span class="student-course">Học viên khóa Animations K12</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="testimonial-card">
+          <p class="testimonial-quote">"Giáo trình chi tiết và sát thực tế. Mentor hỗ trợ nhiệt tình qua kênh Discord. Bài tập lớn cuối khóa giúp tôi xây dựng được một Portfolio cá nhân cực xịn và tìm được việc ngay sau đó."</p>
+          <div class="student-info">
+            <div class="student-img">A</div>
+            <div>
+              <h4 class="student-name">Nguyễn Phương Anh</h4>
+              <span class="student-course">Học viên khóa Frontend K15</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="testimonial-card">
+          <p class="testimonial-quote">"Tôi học thiết kế đồ họa và muốn lấn sân sang làm UI/UX. Khóa học Figma Design System đã cung cấp đúng những kiến thức cốt lõi tôi cần để cộng tác hiệu quả với đội ngũ lập trình."</p>
+          <div class="student-info">
+            <div class="student-img">D</div>
+            <div>
+              <h4 class="student-name">Lê Quốc Dũng</h4>
+              <span class="student-course">Học viên khóa UI/UX K08</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <a href="index.html#hero" class="footer-logo">NEX<span>US</span></a>
+      <p>&copy; 2026 Nexus Creative. All rights reserved. Crafted with Passion.</p>
+    </div>
+  </footer>
+
+  <!-- Loading GSAP and ScrollTrigger plugins -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
